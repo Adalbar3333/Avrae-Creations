@@ -7,6 +7,12 @@ day  = 86400
 text = ""
 
 using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
+def timeCon(sec):
+  t = timeConverter.StoD(sec)
+  texts = ""
+  for x,y in t.items():
+    texts += f'''{x.title()}: {y}'''
+  return texts
 
 settings = {"time":1,"wait":60,"limit":40}
 last     = int(ch.get_cvar("lastWorkdays",0))
@@ -16,7 +22,7 @@ if last == 0:
 
 if settings['wait']:
   if int(time()-last) <= int(settings['wait']):
-    err(f'''You must wait another {timeConverter.StoD(int(settings['wait'])-(int(time())-last)).strip('{}')}''')
+    err(f'''You must wait another {timeCon(int(settings['wait'])-(int(time())-last))}''')
 
 ch.set_cvar("lastWorkdays",int(time()))
 if ctx.guild:
@@ -27,7 +33,7 @@ workdays = int(workdays+plusTime)
 ch.set_cvar("Workdays",workdays)
 
 text += f'''-title "Workdays Tracker: {name}" '''
-text += f''' -desc "**Current Workdays:** {timeConverter.StoD(int(workdays)).strip('{}')}\n**Added Time:** {timeConverter.StoD(int(plusTime)).strip('{}')}"'''
+text += f''' -desc "**Current Workdays:** {timeCon(int(workdays)).s}\n**Added Time:** {timeCon(int(plusTime))}"'''
 
 return text
 </drac2>
