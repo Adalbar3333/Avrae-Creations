@@ -14,7 +14,7 @@ workdays = int(ch.get_cvar("Workdays",0))
 if last == 0:
   last = int(time())
 
-if settings['wait']:
+if settings['wait']):
   if last <= int(settings['wait']:
 		err(f'''You must wait another {timeConverter.StoD(int(int(settings['wait'])-(int(time())-last)}''')
 
