@@ -4,6 +4,8 @@ a    = argparse(A)
 ch   = character()
 day  = 86400
 
+using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
+
 settings = {"time":1,"wait":False}
 last     = int(ch.get_cvar("lastWorkdays",0))
 workdays = int(ch.get_cvar("Workdays",0))
@@ -14,7 +16,8 @@ if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
 plusTime = (int(time()) * settings["time"]) - (int(last) * settings["time"])
 
+ch.set_cvar("Workdays",workdays+pluseTime)
 
-err(plusTime)
+err(timeConverter.StoD(int(plusTime))
 
 </drac2>
