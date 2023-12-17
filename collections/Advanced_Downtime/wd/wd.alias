@@ -23,7 +23,7 @@ ch.set_cvar("Workdays",workdays)
 
 
 text += f'''-title "Workdays Tracker: {name}" '''
-text += f''' -desc "**Current Workdays:** {timeConverter.StoD(int(workdays))}\n**Added Time:** {timeConverter.StoD(int(plusTime))}'''
+text += f''' -desc "**Current Workdays:** {timeConverter.StoD(int(workdays))}\n**Added Time:** {timeConverter.StoD(int(plusTime))}"'''
 
 return text
 </drac2>
