@@ -4,18 +4,19 @@ a    = argparse(A)
 ch   = character()
 day  = 86400
 settings = {"time":1,"wait":false}
-prev     = int(ch.get_cvar("lastWorkdays",0))
+last     = int(ch.get_cvar("lastWorkdays",0))
 workdays = int(ch.get_cvar("Workdays",0))
 
 if prev == 0:
   prev = int(time())
+
 
 ch.set_cvar("lastWorkdays",int(time()))
 
 if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
 
-plusTime = floor(time()) * int(settings['time'])
+plusTime = (time() * settings["time"]) * (last * settings["time"])
 
 err(plusTime)
 
