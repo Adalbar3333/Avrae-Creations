@@ -8,11 +8,16 @@ text = ""
 
 using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
 
-settings = {"time":40,"wait":False,"limit":40}
+settings = {"time":1,"wait":False,"limit":40}
 last     = int(ch.get_cvar("lastWorkdays",0))
 workdays = int(ch.get_cvar("Workdays",0))
 if last == 0:
   last = int(time())
+
+if settings['wait']:
+  if last not >= int(settings['wait']:
+		err(f'''You must wait another {timeConverter.StoD(int(int(settings['wait'])-(int(time())-last)}
+
 ch.set_cvar("lastWorkdays",int(time()))
 if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
