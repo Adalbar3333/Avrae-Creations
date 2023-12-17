@@ -18,6 +18,6 @@ plusTime = (int(time()) * settings["time"]) - (int(last) * settings["time"])
 
 ch.set_cvar("Workdays",workdays+pluseTime)
 
-err(timeConverter.StoD(int(plusTime))
+err(timeConverter.StoD(int(plusTime)))
 
 </drac2>
