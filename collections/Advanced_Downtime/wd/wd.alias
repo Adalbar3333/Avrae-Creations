@@ -8,7 +8,7 @@ text = ""
 
 using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
 def timeCon(sec):
-  t = timeConverter.StoD(sec)
+  t = load_json(timeConverter.StoD(sec))
   texts = ""
   for x,y in t.items():
     texts += f'''{x.title()}: {y}'''
