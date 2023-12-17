@@ -16,7 +16,7 @@ if last == 0:
 
 if settings['wait']:
   if last <= int(settings['wait']):
-		err(f'''You must wait another {timeConverter.StoD(int(int(settings['wait'])-(int(time())-last)}''')
+    err(f'''You must wait another {timeConverter.StoD(int(int(settings['wait'])-(int(time())-last)}''')
 
 ch.set_cvar("lastWorkdays",int(time()))
 if ctx.guild:
