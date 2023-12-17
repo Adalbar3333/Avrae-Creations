@@ -8,7 +8,7 @@ text = ""
 
 using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
 
-settings = {"time":1,"wait":False}
+settings = {"time":40,"wait":False,"limit":40}
 last     = int(ch.get_cvar("lastWorkdays",0))
 workdays = int(ch.get_cvar("Workdays",0))
 if last == 0:
@@ -16,11 +16,10 @@ if last == 0:
 ch.set_cvar("lastWorkdays",int(time()))
 if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
-plusTime = (int(time()) * settings["time"]) - (int(last) * settings["time"])
+plusTime = min(((int(time()) * settings["time"]) - (int(last) * settings["time"])), int(settings['limit']))
 
 workdays = int(workdays+plusTime)
 ch.set_cvar("Workdays",workdays)
-
 
 text += f'''-title "Workdays Tracker: {name}" '''
 text += f''' -desc "**Current Workdays:** {timeConverter.StoD(int(workdays)).strip('{}')}\n**Added Time:** {timeConverter.StoD(int(plusTime)).strip('{}')}"'''
