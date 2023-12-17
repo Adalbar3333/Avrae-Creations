@@ -16,7 +16,7 @@ if last == 0:
 ch.set_cvar("lastWorkdays",int(time()))
 if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
-plusTime = min(((int(time()) * settings["time"]) - (int(last) * settings["time"])), int(settings['limit']))
+plusTime = min(((int(time()) * settings["time"]) - (int(last) * settings["time"])), (int(settings['limit'])*int(settings['time'])))
 
 workdays = int(workdays+plusTime)
 ch.set_cvar("Workdays",workdays)
