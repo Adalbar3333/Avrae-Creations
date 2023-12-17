@@ -3,7 +3,7 @@ A    = &ARGS&
 a    = argparse(A)
 ch   = character()
 day  = 86400
-settings = {"time":1,"wait":false}
+settings = {"time":1,"wait":False}
 prev     = int(ch.get_cvar("lastWorkdays",0))
 workdays = int(ch.get_cvar("Workdays",0))
 
