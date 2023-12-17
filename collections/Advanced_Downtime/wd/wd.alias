@@ -11,7 +11,7 @@ def timeCon(sec):
   t = load_json(timeConverter.StoD(sec))
   texts = ""
   for x,y in t.items():
-    texts += f'''{x.title()}: {y}'''
+    texts += f'''{x.title()}: {y}, '''
   return texts
 
 settings = {"time":1,"wait":60,"limit":40}
