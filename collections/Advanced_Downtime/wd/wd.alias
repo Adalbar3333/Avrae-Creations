@@ -16,7 +16,7 @@ if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
 plusTime = (int(time()) * settings["time"]) - (int(last) * settings["time"])
 
-ch.set_cvar("Workdays",workdays+pluseTime)
+ch.set_cvar("Workdays",int(workdays+pluseTime))
 
 err(timeConverter.StoD(int(plusTime)))
 
