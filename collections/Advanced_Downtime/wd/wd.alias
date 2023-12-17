@@ -3,22 +3,18 @@ A    = &ARGS&
 a    = argparse(A)
 ch   = character()
 day  = 86400
+
 settings = {"time":1,"wait":false}
 last     = int(ch.get_cvar("lastWorkdays",0))
+settings = {"time":1,"wait":False}
+prev     = int(ch.get_cvar("lastWorkdays",0))
 workdays = int(ch.get_cvar("Workdays",0))
-
 if prev == 0:
   prev = int(time())
-
-
 ch.set_cvar("lastWorkdays",int(time()))
-
 if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
-
 plusTime = (time() * settings["time"]) * (last * settings["time"])
-
 err(plusTime)
-
 
 </drac2>
