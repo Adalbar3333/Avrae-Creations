@@ -12,7 +12,7 @@ if last == 0:
 ch.set_cvar("lastWorkdays",int(time()))
 if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
-plusTime = (time() * settings["time"]) * (last * settings["time"])
+plusTime = (time() * settings["time"]) - (last * settings["time"])
 
 
 err(plusTime)
