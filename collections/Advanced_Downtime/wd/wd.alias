@@ -1,8 +1,10 @@
+embed
 <drac2>
 A    = &ARGS&
 a    = argparse(A)
 ch   = character()
 day  = 86400
+text = ""
 
 using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
 
@@ -16,8 +18,12 @@ if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
 plusTime = (int(time()) * settings["time"]) - (int(last) * settings["time"])
 
-ch.set_cvar("Workdays",int(workdays+plusTime))
+workdays = int(workdays+plusTime)
+ch.set_cvar("Workdays",workdays)
 
-err(timeConverter.StoD(int(plusTime)))
 
+text += f'''-title "Workdays Tracker: {name}" '''
+text += f''' -desc "**Current Workdays:** {timeConverter.StoD(int(workdays))}\n**Added Time:** {timeConverter.StoD(int(plusTime))}'''
+
+return text
 </drac2>
