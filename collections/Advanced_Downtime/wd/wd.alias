@@ -11,7 +11,7 @@ if '+' in &ARGS&:
   amt = '+'+&ARGS&[&ARGS&.index('+')+1]
 if '-' in &ARGS&:
   amt = '-'+&ARGS&[&ARGS&.index('+')+1]
-amt = int(amt)*days
+amt = int(amt)*day
 
 using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
 def timeCon(sec):
