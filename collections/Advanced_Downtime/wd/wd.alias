@@ -34,7 +34,7 @@ ch.set_cvar("Workdays",workdays)
 
 text += f'''-title "Workdays Tracker: {name}" '''
 text += f''' -desc "**Current Workdays:** {timeCon(int(workdays))}\n**Added Time:** {timeCon(int(plusTime))}"'''
-text += f''' -f "Simplified Days: {{int(workdays)//(day*int(settings['time']))}}" '''
+text += f''' -f "Simplified Days: {int(workdays)//(day*int(settings['time']))}" '''
 
 return text
 </drac2>
