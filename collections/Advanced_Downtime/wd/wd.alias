@@ -43,7 +43,7 @@ text += f'''-title "Workdays Tracker: {name}" '''
 text += f''' -desc "__Current Workdays:__ {timeCon(int(workdays))}\n__Added Time:__ {timeCon(int(plusTime))}"'''
 text += f''' -f "Simplified Days: {int(workdays)//(day*int(settings['time']))}" '''
 if amt > 0:
-  text += f''' -f "Manuel Adjustment: {amt/day} Days" '''
+  text += f''' -f "__Manuel Adjustment:__ {amt/day} Days" '''
 
 return text
 </drac2>
