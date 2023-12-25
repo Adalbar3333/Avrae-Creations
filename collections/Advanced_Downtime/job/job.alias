@@ -4,7 +4,7 @@ A = &ARGS&
 a = argparse(A)
 ch = character()
 day = 86400
-a.adv(boolwise=True)
+adv = a.adv(boolwise=True)
 mc = 0
 text = f""" -footer "Downtime|Adalbär3333" """
 req = '&1&'
