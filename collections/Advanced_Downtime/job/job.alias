@@ -44,14 +44,25 @@ if job['name'] not in jobXP:
 else: 
   jobLevel = max(int(jobXP["job['name']"])/(int(job['scale'])), 1)
 
-
+checkList = []
+xpGain = 0
+coinGain = 0
 for x in job['checks']:
   if x['type'] == "tool":
     check = dth.check(x['type'], x['check'], x['ability'], x['dc'], adv, a.get('b'), mc, addtools)
-    err(check)
+    if check[1]:
+      roll = vroll(f"""{jobLevel}{x['dice']}"""
+      checkList += f"""**{x['check']}:** {check[0]}\n{roll}\n{x['desc']}\n\n"""
+      xpGain += check[2]*roll.total
+      coinGain += roll.total
   else:
     check = dth.check(x['type'], x['check'], None, x['dc'], adv, a.join('b', '+', '').strip('+'))
-    err(check)
+    if check[1]:
+      roll = vroll(f"""{jobLevel}{x['dice']}"""
+      checkList += f"""**{x['check']}:** {check[0]}\n{roll}\n{x['desc']}\n\n"""
+      xpGain += check[2]*roll.total
+      coinGain += roll.total
+return checkList
 
 gain = 0
 if job['name'] in jobXP:
