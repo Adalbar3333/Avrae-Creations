@@ -5,12 +5,14 @@ a    = argparse(A)
 ch   = character()
 day  = 86400
 text = ""
+if not  ch.get_cvar(f'{wname}', False):
+  NEW = True
+
+emptyWD = {"wdays":0,"last":time(),"used":0,"uWait":0}
 
 wname = "Workdays"
-lwname = "lastWorkdays"
 if ctx.guild:
   wname = "Workdays_"+ctx.guild.id
-  lwname = "lastWorkdays_"+ctx.guild.id
 
 amt = 0 
 if A:
@@ -32,14 +34,17 @@ settings = {"time":1,"wait":60,"limit":40, "use":40, "useWait":1}
 if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
 
-last     = int(ch.get_cvar(f'{lwname}',0))
-workdays = int(ch.get_cvar(f'{wname}',int(time())))
+wdInfo = load_json(ch.get_cvar(f'{wname}', emptyWD))
 
-ch.set_cvar(f'{lwname}',int(time()))
+last     = int(wdInfo['last'])
+workdays = int(wdInfo['days'])
+
+wdInfo['last'] = int(time())
 plusTime = min((int(amt) + int(time()) * int(settings["time"]) - (int(last) * int(settings["time"]))), int(amt) + (int(settings['limit'])*int(settings['time']*day)))
 
 workdays = int(workdays+plusTime)
-ch.set_cvar(f'{wname}',workdays)
+wdInfo['wdays'] = workdays
+ch.set_cvar(f'{wname}',wdInfo)
 
 text += f'''-title "Workdays Tracker: {name}" '''
 text += f''' -f "__Simplified Days:__ {int(workdays)//(day*int(settings['time']))}\n\n__Current Workdays:__ {timeCon(int(workdays))}\n__Added Time:__ {timeCon(int(plusTime))}"'''
@@ -47,6 +52,9 @@ text += f''' -f "__Simplified Days:__ {int(workdays)//(day*int(settings['time'])
 if amt > 0:
   text += f''' -f "__Manuel Adjustment:__ {amt/day} Days" '''
 text += f''' -f "Server: {ctx.guild.name if ctx.guild else 'None'}" '''
+
+if NEW:
+  text += f''' -f "Created CVAR for workdays for the following server {ctx.guild.name if ctx.guild else 'Personal Messages'}." '''
 
 return text
 </drac2>
