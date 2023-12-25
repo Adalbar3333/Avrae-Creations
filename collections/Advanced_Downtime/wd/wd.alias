@@ -42,7 +42,7 @@ if settings['wait']:
       err(f'''You must wait another {timeCon(int(settings['wait'])-(int(time())-last))}''')
 
 ch.set_cvar(f'{lwname}',int(time()))
-plusTime = min(((amt + int(time()) * settings["time"]) - (int(last) * settings["time"])), amt + (int(settings['limit'])*int(settings['time']*day)))
+plusTime = min(((amt + int(time()) * int(settings["time"])) - (int(last) * int(settings["time"]))), amt + (int(settings['limit'])*int(settings['time']*day)))
 
 workdays = int(workdays+plusTime)
 ch.set_cvar(f'{wname}',workdays)
