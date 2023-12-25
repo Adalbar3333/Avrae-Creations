@@ -2,7 +2,7 @@ embed
 <drac2>
 A = &ARGS& 
 a = argparse(A)
-c = character()
+ch = character()
 day = 86400
 text = f""" -footer "Downtime|Adalbär3333" """
 req = '&1&'
@@ -15,7 +15,7 @@ if ctx.guild:
   wname = "Workdays_"+ctx.guild.id
 
 NEW = False
-if not  ch.get_cvar(f'{wname}', False):
+if not  ch.get_cvar(wname, False):
   NEW = True
 
 settings = {"time":1,"wait":0,"limit":40, "use":40, "useWait":1}
