@@ -52,14 +52,14 @@ for x in job['checks']:
     check = dth.check(x['type'], x['check'], x['ability'], x['dc'], adv, a.get('b'), mc, addtools)
     if check[1]:
       droll = vroll(f"""{jobLevel}{x['dice']}""")
-      checkList += f"""**{x['check']}:** {check[0]}\n{droll}\n{x['desc']}\n\n"""
+      checkList += [f"""**{x['check']}:** {check[0]}\n{droll}\n{x['desc']}\n\n"""]
       xpGain += int(check[2]) * droll.total
       coinGain += droll.total
   else:
     check = dth.check(x['type'], x['check'], None, x['dc'], adv, a.join('b', '+', '').strip('+'))
     if check[1]:
       droll = vroll(f"""{jobLevel}{x['dice']}""")
-      checkList += f"""**{x['check']}:** {check[0]}\n{droll}\n{x['desc']}\n\n"""
+      checkList += [f"""**{x['check']}:** {check[0]}\n{droll}\n{x['desc']}\n\n"""]
       xpGain += int(check[2]) * droll.total
       coinGain += droll.total
 err(checkList)
