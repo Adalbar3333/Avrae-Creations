@@ -5,14 +5,15 @@ a    = argparse(A)
 ch   = character()
 day  = 86400
 text = ""
-if not  ch.get_cvar(f'{wname}', False):
-  NEW = True
 
 emptyWD = {"wdays":0,"last":time(),"used":0,"uWait":0}
 
 wname = "Workdays"
 if ctx.guild:
   wname = "Workdays_"+ctx.guild.id
+
+if not  ch.get_cvar(f'{wname}', False):
+  NEW = True
 
 amt = 0 
 if A:
