@@ -5,5 +5,15 @@ a = argparse(A)
 c = character()
 text = f""" -footer "Downtime|Adalbär3333" """
 
+emptyWD = {"wdays":0,"last":time(),"used":0,"uWait":0}
+
+wname = "Workdays"
+if ctx.guild:
+  wname = "Workdays_"+ctx.guild.id
+
+wdInfo = load_json(get_cvar(f'{wname}', emptyWD))
+
+err(wdInfo)
+
 return text
 </drac2>
