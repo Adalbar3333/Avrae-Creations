@@ -36,7 +36,7 @@ settings = {"time":1,"wait":60,"limit":40, "use":40, "useWait":1}
 if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
 
-wdInfo = load_json(ch.get_cvar(f'{wname}', emptyWD))
+wdInfo = load_yaml(ch.get_cvar(wname, emptyWD))
 
 err(wdInfo['last'])
 
