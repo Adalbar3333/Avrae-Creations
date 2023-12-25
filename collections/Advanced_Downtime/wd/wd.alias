@@ -13,13 +13,13 @@ if ctx.guild:
   lwname = "lastWorkdays_"+ctx.guild.id
 
 amt = 0
-if '+' in &ARGS& and not typeof(&1&) == int:
-  amt = '+'+&ARGS&[&ARGS&.index('+')+1]
-elif '-' in &ARGS& and not typeof(&1&) == int:
-  amt = '-'+&ARGS&[&ARGS&.index('-')+1]
-else: 
+if '&1&' == '+' or '&1&' == '-':
+  if '+' in &ARGS& and not typeof(&1&) == int:
+    amt = '+'+&ARGS&[&ARGS&.index('+')+1]
+  elif '-' in &ARGS& and not typeof(&1&) == int:
+    amt = '-'+&ARGS&[&ARGS&.index('-')+1]
+else:
   amt = int('&1&')
-amt = int(amt)*day
 
 using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
 def timeCon(sec):
