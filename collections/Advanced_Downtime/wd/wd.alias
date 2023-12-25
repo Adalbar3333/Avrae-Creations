@@ -6,13 +6,13 @@ ch   = character()
 day  = 86400
 text = ""
 
-err(ctx.guild)
-
 wname = "Workdays"
 lwname = "lastWorkdays"
 if ctx.guild:
   wname = "Workdays-"+ctx.guild.id
   lwname = "lastWorkdays-"+ctx.guild.id
+
+err(wname)
 
 amt = 0
 if '+' in &ARGS&:
