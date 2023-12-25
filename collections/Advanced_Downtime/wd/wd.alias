@@ -37,7 +37,9 @@ if ctx.guild:
 
 wdInfo = load_json(ch.get_cvar(f'{wname}', emptyWD))
 
-last     = int(wdInfo['last'])
+err(typeof(wdInfo['last']))
+
+last     = wdInfo['last']
 workdays = int(wdInfo['days'])
 
 wdInfo['last'] = int(time())
