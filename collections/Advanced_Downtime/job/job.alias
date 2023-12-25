@@ -7,12 +7,16 @@ day = 86400
 text = f""" -footer "Downtime|Adalbär3333" """
 req = '&1&'
 
+using(dth='667ff543-88a3-4550-bd78-6c461a8a7a41')
+
 emptyWD = {
     "wdays": "0", "last": f"{floor(time())}", "used": "0", "uWait": "0"}
 
 wname = "Workdays"
+wjob = "Jobs"
 if ctx.guild:
   wname = "Workdays_"+ctx.guild.id
+  wjob = "Jobs_"+ctx.guild.id
 
 NEW = False
 if not  ch.get_cvar(wname, False):
@@ -28,8 +32,32 @@ jobs = load_yaml(get_gvar("220dcf6e-6597-4695-9144-64dea6432a42"))
 
 for x,y in jobs.items():
   if req in x.lower():
-    err("Yay!")
-err("NO!!!")
+    y['name'] = x
+    job = y
+
+jobXP = ch.get_cvar(wjob, {})
+
+if job['name'] not in jobXP:
+  jobLevel = 1
+else: 
+  jobLevel = max(int(jobXP["job['name']"])/(int(job['scale'])), 1)
+
+
+for x in job['checks']:
+  if x['type'] == "tool":
+    check = dth.check(x['type'], x['check'], x['ability'], x['dc'], adv, a.get('b'), mc, addtools)
+    err(check)
+  else:
+    check = dth.check(x['type'], x['check'], None, x['dc'], adv, a.get('b'), mc, addtools)
+    err(check)
+
+gain = 0
+if job['name'] in jobXP:
+  jobXP[f"job['name']"] = int(jobXP[f"job['name']"]) + gain
+else:
+  jobXP[f"job['name']"] = gain
+
+
 
 return text
 </drac2>
