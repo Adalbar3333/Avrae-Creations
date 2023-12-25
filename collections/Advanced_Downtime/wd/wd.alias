@@ -32,13 +32,12 @@ if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
 
 last     = int(ch.get_cvar(f'{lwname}',0))
-workdays = int(ch.get_cvar(f'{wname}',0))
-if last == 0:
-  last = int(time())
+workdays = int(ch.get_cvar(f'{wname}',int(time())))
 
-if int(settings['wait'])>0:
-  if int(time()-last) <= int(settings['wait']):
-    err(f'''You must wait another {timeCon(int(settings['wait'])-(int(time())-last))}''')
+if settings['wait']:
+  if int(settings['wait']) > 0:
+    if int(time()-last) <= int(settings['wait']):
+      err(f'''You must wait another {timeCon(int(settings['wait'])-(int(time())-last))}''')
 
 ch.set_cvar(f'{lwname}',int(time()))
 plusTime = min(((amt + int(time()) * settings["time"]) - (int(last) * settings["time"])), amt + (int(settings['limit'])*int(settings['time']*day)))
