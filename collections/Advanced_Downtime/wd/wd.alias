@@ -38,9 +38,7 @@ if ctx.guild:
 
 wdInfo = load_yaml(ch.get_cvar(wname, emptyWD))
 
-err(wdInfo['last'])
-
-last     = wdInfo['last']
+last     = int(wdInfo['last'])
 workdays = int(wdInfo['days'])
 
 wdInfo['last'] = int(time())
