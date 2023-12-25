@@ -12,11 +12,12 @@ if ctx.guild:
   wname = "Workdays_"+ctx.guild.id
   lwname = "lastWorkdays_"+ctx.guild.id
 
-amt = 0
-if '&1&' in '-+' and '&2&'.isdecimal():
-  amt = int('&1&'+'&2&')
-else:
-  amt = int('&1&') if '&1&'.strip('+-').isdecimal else 0
+amt = 0 
+if A:
+  if '&1&' in '-+' and '&2&'.isdecimal():
+    amt = int('&1&'+'&2&')
+  else:
+    amt = int('&1&') if '&1&'.strip('+-').isdecimal else 0
 amt = amt*day
 
 using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
