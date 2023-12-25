@@ -12,8 +12,6 @@ if ctx.guild:
   wname = "Workdays-"+ctx.guild.id
   lwname = "lastWorkdays-"+ctx.guild.id
 
-err(wname)
-
 amt = 0
 if '+' in &ARGS&:
   amt = '+'+&ARGS&[&ARGS&.index('+')+1]
@@ -30,8 +28,12 @@ def timeCon(sec):
   return texts
 
 settings = {"time":1,"wait":60,"limit":40, "use":40, "useWait":1}
-last     = int(ch.get_cvar(lwname,0))
-workdays = int(ch.get_cvar(wname,0))
+if ctx.guild:
+  settings = load_yaml(get_svar("workdaysSettings", settings))
+
+
+last     = int(ch.get_cvar(f'{lwname}',0))
+workdays = int(ch.get_cvar(f'{wname}',0))
 if last == 0:
   last = int(time())
 
@@ -39,9 +41,7 @@ if int(settings['wait'])>0:
   if int(time()-last) <= int(settings['wait']):
     err(f'''You must wait another {timeCon(int(settings['wait'])-(int(time())-last))}''')
 
-ch.set_cvar(lwname,int(time()))
-if ctx.guild:
-  settings = load_yaml(get_svar("workdaysSettings", settings))
+ch.set_cvar(lwname}',int(time()))
 plusTime = min(((amt + int(time()) * settings["time"]) - (int(last) * settings["time"])), amt + (int(settings['limit'])*int(settings['time']*day)))
 
 workdays = int(workdays+plusTime)
