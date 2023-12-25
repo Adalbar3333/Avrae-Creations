@@ -58,7 +58,7 @@ for x in job['checks']:
   else:
     check = dth.check(x['type'], x['check'], None, x['dc'], adv, a.join('b', '+', '').strip('+'))
     if check[1]:
-      roll = vroll(f"""{jobLevel}{x['dice']}"""
+      roll = vroll(f"""{jobLevel}{x['dice']}""")
       checkList += f"""**{x['check']}:** {check[0]}\n{roll}\n{x['desc']}\n\n"""
       xpGain += check[2]*roll.total
       coinGain += roll.total
