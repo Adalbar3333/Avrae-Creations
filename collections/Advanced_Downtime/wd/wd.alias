@@ -37,11 +37,6 @@ if ctx.guild:
 last     = int(ch.get_cvar(f'{lwname}',0))
 workdays = int(ch.get_cvar(f'{wname}',int(time())))
 
-if settings['wait']:
-  if int(settings['wait']) > 0:
-    if int(time()-last) <= int(settings['wait']):
-      err(f'''You must wait another {timeCon(int(settings['wait'])-(int(time())-last))}''')
-
 ch.set_cvar(f'{lwname}',int(time()))
 plusTime = min((int(amt) + int(time()) * int(settings["time"]) - (int(last) * int(settings["time"]))), int(amt) + (int(settings['limit'])*int(settings['time']*day)))
 
