@@ -15,9 +15,9 @@ if ctx.guild:
 amt = 0
 if '&1&' == '+' or '&1&' == '-':
   if '+' in &ARGS&:
-    amt = '+'+&ARGS&[&ARGS&.index('+')+1]
+    amt = int('+'+&ARGS&[&ARGS&.index('+')+1])
   elif '-' in &ARGS&:
-    amt = '-'+&ARGS&[&ARGS&.index('-')+1]
+    amt = int('-'+&ARGS&[&ARGS&.index('-')+1])
 else:
   amt = int('&1&')
 
@@ -40,8 +40,6 @@ if settings['wait']:
   if int(settings['wait']) > 0:
     if int(time()-last) <= int(settings['wait']):
       err(f'''You must wait another {timeCon(int(settings['wait'])-(int(time())-last))}''')
-
-err(amt)
 
 ch.set_cvar(f'{lwname}',int(time()))
 plusTime = min((int(amt) + int(time()) * int(settings["time"]) - (int(last) * int(settings["time"]))), int(amt) + (int(settings['limit'])*int(settings['time']*day)))
