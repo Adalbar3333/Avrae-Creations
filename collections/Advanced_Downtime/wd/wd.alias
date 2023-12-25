@@ -33,7 +33,7 @@ workdays = int(ch.get_cvar(wname,0))
 if last == 0:
   last = int(time())
 
-if settings['wait']:
+if settings['wait']>0:
   if int(time()-last) <= int(settings['wait']):
     err(f'''You must wait another {timeCon(int(settings['wait'])-(int(time())-last))}''')
 
