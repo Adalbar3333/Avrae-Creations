@@ -62,7 +62,7 @@ for x in job['checks']:
       checkList += f"""**{x['check']}:** {check[0]}\n{droll}\n{x['desc']}\n\n"""
       xpGain += check[2]*droll.total
       coinGain += droll.total
-return checkList
+err(checkList)
 
 gain = 0
 if job['name'] in jobXP:
