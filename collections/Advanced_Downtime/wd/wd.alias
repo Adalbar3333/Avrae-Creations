@@ -10,7 +10,7 @@ wname = "Workdays"
 lwname = "lastWorkdays"
 if ctx.guild:
   wname = "Workdays-"+ctx.guild.id
-  lwname = "lastWorkdays-"+ctx,guild.id
+  lwname = "lastWorkdays-"+ctx.guild.id
 
 amt = 0
 if '+' in &ARGS&:
