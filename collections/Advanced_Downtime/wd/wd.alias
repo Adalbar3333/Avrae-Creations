@@ -14,9 +14,9 @@ if ctx.guild:
 
 amt = 0
 if '&1&' == '+' or '&1&' == '-':
-  if '+' in &ARGS& and not typeof(&1&) == int:
+  if '+' in &ARGS&:
     amt = '+'+&ARGS&[&ARGS&.index('+')+1]
-  elif '-' in &ARGS& and not typeof(&1&) == int:
+  elif '-' in &ARGS&:
     amt = '-'+&ARGS&[&ARGS&.index('-')+1]
 else:
   amt = int('&1&')
