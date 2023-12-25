@@ -6,6 +6,12 @@ ch   = character()
 day  = 86400
 text = ""
 
+wname = "Workdays"
+lwname = "lastWorkdays"
+if ctx.guild:
+  wname = "Workdays-"+ctx.guild.id
+  lwname = "lastWorkdays-"+ctx,guild.id
+
 amt = 0
 if '+' in &ARGS&:
   amt = '+'+&ARGS&[&ARGS&.index('+')+1]
@@ -22,8 +28,8 @@ def timeCon(sec):
   return texts
 
 settings = {"time":1,"wait":60,"limit":40, "use":40, "useWait":1}
-last     = int(ch.get_cvar("lastWorkdays",0))
-workdays = int(ch.get_cvar("Workdays",0))
+last     = int(ch.get_cvar(lwname,0))
+workdays = int(ch.get_cvar(wname,0))
 if last == 0:
   last = int(time())
 
@@ -31,13 +37,13 @@ if settings['wait']:
   if int(time()-last) <= int(settings['wait']):
     err(f'''You must wait another {timeCon(int(settings['wait'])-(int(time())-last))}''')
 
-ch.set_cvar("lastWorkdays",int(time()))
+ch.set_cvar(lwname,int(time()))
 if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
 plusTime = min(((amt + int(time()) * settings["time"]) - (int(last) * settings["time"])), amt + (int(settings['limit'])*int(settings['time']*day)))
 
 workdays = int(workdays+plusTime)
-ch.set_cvar("Workdays",workdays)
+ch.set_cvar(wname,workdays)
 
 text += f'''-title "Workdays Tracker: {name}" '''
 text += f''' -desc "__Current Workdays:__ {timeCon(int(workdays))}\n__Added Time:__ {timeCon(int(plusTime))}"'''
