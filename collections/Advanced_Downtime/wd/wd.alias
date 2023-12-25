@@ -12,10 +12,10 @@ if ctx.guild:
   wname = "Workdays_"+ctx.guild.id
   lwname = "lastWorkdays_"+ctx.guild.id
 
-amt = 0
-if '+' in &ARGS&:
+amt = int('&1&')
+if '+' in &ARGS& and not int('&1&'):
   amt = '+'+&ARGS&[&ARGS&.index('+')+1]
-if '-' in &ARGS&:
+if '-' in &ARGS& and not int('&1&'):
   amt = '-'+&ARGS&[&ARGS&.index('-')+1]
 amt = int(amt)*day
 
