@@ -8,8 +8,6 @@ text = ""
 
 emptyWD = {"wdays":"0","last":"0","used":"0","uWait":"0"}
 
-err(emptyWD['last'])
-
 wname = "Workdays"
 if ctx.guild:
   wname = "Workdays_"+ctx.guild.id
