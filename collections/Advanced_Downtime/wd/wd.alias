@@ -20,6 +20,7 @@ if '&1&' == '+' or '&1&' == '-':
     amt = int('-'+&ARGS&[&ARGS&.index('-')+1])
 else:
   amt = int('&1&')
+amt = amt*day
 
 using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
 def timeCon(sec):
