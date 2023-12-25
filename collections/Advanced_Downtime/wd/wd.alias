@@ -13,6 +13,7 @@ wname = "Workdays"
 if ctx.guild:
   wname = "Workdays_"+ctx.guild.id
 
+NEW = False
 if not  ch.get_cvar(f'{wname}', False):
   NEW = True
 
@@ -32,7 +33,7 @@ def timeCon(sec):
     texts += f'''{x.title()}: {y}, '''
   return texts
 
-settings = {"time":1,"wait":60,"limit":40, "use":40, "useWait":1}
+settings = {"time":1,"wait":0,"limit":40, "use":40, "useWait":1}
 if ctx.guild:
   settings = load_yaml(get_svar("workdaysSettings", settings))
 
