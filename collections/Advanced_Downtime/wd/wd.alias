@@ -7,7 +7,7 @@ day  = 86400
 text = ""
 
 emptyWD = {
-    "wdays": "0", "last": "0", "used": "0", "uWait": "0"}
+    "wdays": "0", "last": f"{time()}", "used": "0", "uWait": "0"}
 
 wname = "Workdays"
 if ctx.guild:
