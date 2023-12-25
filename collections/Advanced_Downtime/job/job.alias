@@ -70,7 +70,7 @@ else:
   jobXP[f"job['name']"] = gain
 ch.set_cvar(wjob, jobXP)
 
-text += f''' -f "{checkList.join('')}" '''
+text += f''' -f "{''.join(checkList)}" '''
 
 return text
 </drac2>
