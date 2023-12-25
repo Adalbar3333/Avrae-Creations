@@ -9,8 +9,8 @@ text = ""
 wname = "Workdays"
 lwname = "lastWorkdays"
 if ctx.guild:
-  wname = "Workdays-"+ctx.guild.id
-  lwname = "lastWorkdays-"+ctx.guild.id
+  wname = "Workdays_"+ctx.guild.id
+  lwname = "lastWorkdays_"+ctx.guild.id
 
 amt = 0
 if '+' in &ARGS&:
