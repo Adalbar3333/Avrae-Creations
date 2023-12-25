@@ -6,6 +6,8 @@ ch   = character()
 day  = 86400
 text = ""
 
+err(ctx.guild)
+
 wname = "Workdays"
 lwname = "lastWorkdays"
 if ctx.guild:
@@ -33,7 +35,7 @@ workdays = int(ch.get_cvar(wname,0))
 if last == 0:
   last = int(time())
 
-if settings['wait']>0:
+if int(settings['wait'])>0:
   if int(time()-last) <= int(settings['wait']):
     err(f'''You must wait another {timeCon(int(settings['wait'])-(int(time())-last))}''')
 
