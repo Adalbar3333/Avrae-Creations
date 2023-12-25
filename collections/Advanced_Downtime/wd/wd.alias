@@ -28,8 +28,8 @@ def timeCon(sec):
   return texts
 
 settings = {"time":1,"wait":60,"limit":40, "use":40, "useWait":1}
-if ctx.guild:
-  settings = load_yaml(get_svar("workdaysSettings", settings))
+
+settings = load_yaml(get_svar("workdaysSettings", settings))
 
 
 last     = int(ch.get_cvar(f'{lwname}',0))
