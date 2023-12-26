@@ -43,7 +43,7 @@ if job['name'] not in jobXP:
   jobLevel = 1
 else:
   jName = job['name']
-  jobLevel = min((int(jobXP[jName])//int(job['scale'])), job['level'])    
+  jobLevel = min((int(jobXP[jName])//int(job['scale'])), int(job['level']))    
 
 checkList = []
 xpGain = 0
@@ -83,8 +83,10 @@ else:
   jobXP.update(up)
 ch.set_cvar(wjob, jobXP)
 
+text += f''' -title "{name} Does Work: {job['name']}" '''
+text += f''' -desc "*{job['desc']}* \nMax Level: {job['level']}/{jobLevel}" '''
 text += f''' -f "Checks|{''.join(checkList)}" '''
-text += f''' -f "Job Level: {jobLevel} ({jobXP[job['name']]})" '''
+text += f''' -f "Current XP: {jobXP[job['name']]} \nXP Gained: {gain}" '''
 
 return text
 </drac2>
