@@ -40,7 +40,7 @@ for x,y in jobs.items():
 jobXP = load_yaml(ch.get_cvar(wjob, {}))
 
 levelList = []
-for x in range(100):
+for x in range(20):
   levelList += x*int(job['scale'])* [int(job['incrument']) if x>1 else 0]
 err(levelList)
 
