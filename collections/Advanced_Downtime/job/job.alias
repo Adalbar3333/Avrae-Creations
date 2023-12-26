@@ -45,6 +45,7 @@ inc = int(job['incrument'])
 for x,y in enumerate(range(10)):
   if x > 2:
     levelList += x * scale
+    err(levelList)
   else:
     Inc = inc * scale
     levelList += Inc * x
