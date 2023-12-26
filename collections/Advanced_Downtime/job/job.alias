@@ -40,11 +40,13 @@ for x,y in jobs.items():
 jobXP = load_yaml(ch.get_cvar(wjob, {}))
 
 levelList = []
+scale = int(job['scale'])
+inc = int(job['incrument'])
 for x,y in enumerate(range(10)):
-  if y > 2:
-    levelList += x * int(job['scale'])
+  if x > 2:
+    levelList += x * scale
   else:
-    levelList += (x*int(job['incrument'])) * int(job['scale'])
+    levelList += x * scale * inc
 err(levelList)
 
 if job['name'] not in jobXP:
