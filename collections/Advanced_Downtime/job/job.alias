@@ -37,7 +37,7 @@ for x,y in jobs.items():
     y['name'] = x
     job = y
 
-jobXP = ch.get_cvar(wjob, {})
+jobXP = load_yaml(ch.get_cvar(wjob, {}))
 
 if job['name'] not in jobXP:
   jobLevel = 1
