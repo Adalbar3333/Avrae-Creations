@@ -44,6 +44,8 @@ if job['name'] not in jobXP:
 else:
   jName = job['name']
   jobLevel = min((int(jobXP[jName])//int(job['scale'])), int(job['level']))    
+  if jobLevel < 1:
+    jobLevel = 1
 
 checkList = []
 xpGain = 0
