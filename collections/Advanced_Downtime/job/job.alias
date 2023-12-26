@@ -41,14 +41,16 @@ jobXP = load_yaml(ch.get_cvar(wjob, {}))
 
 levelList = []
 for x,y in enumerate(range(10)):
-  levelList.append(int(job['incrument'])*x*int(job['scale']))
-err(levelList)
+  levelList.append(int(job['incrument'])*x))
+
 
 if job['name'] not in jobXP:
   jobLevel = 1
 else:
-  for x,jobLevel in levelList:
+  for jobLevel,x in enumerate(levelList):
     rJob = job['name']
+    if int(jobLevel) >= int(jobXP[rjob]):
+      break
     
 
 checkList = []
