@@ -39,10 +39,17 @@ for x,y in jobs.items():
 
 jobXP = load_yaml(ch.get_cvar(wjob, {}))
 
+levelList = []
+for x in range(100):
+  levelList += x*int(job['scale'])* [int(job['incrument']) if x>1 else 0]
+err(levelList)
+
 if job['name'] not in jobXP:
   jobLevel = 1
-else: 
-  jobLevel = max(int(jobXP["job['name']"])/(int(job['scale'])), 1)
+else:
+  for x,jobLevel in levelList:
+    rJob = job['name']
+    
 
 checkList = []
 xpGain = 0
