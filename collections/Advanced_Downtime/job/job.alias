@@ -95,6 +95,8 @@ ch.set_cvar(wjob, jobXP)
 wdInfo['wdays'] = int(wdInfo['wdays'])-day
 wdInfo['used'] = int(wdInfo['used']) + 1
 
+ch.set_cvar(wname, dump_json(wdInfo))
+
 text += f''' -title "{name} Does Work: {job['name']}" '''
 text += f''' -desc "*{job['desc']}* \nLevel: {jobLevel}/{job['level']}" '''
 text += f''' -f "Checks|{''.join(checkList)}" '''
