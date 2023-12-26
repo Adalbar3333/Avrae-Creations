@@ -9,6 +9,14 @@ mc = 0
 text = f""" -footer "Downtime|Adalbär3333" """
 req = '&1&'
 
+using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
+def timeCon(sec):
+  t = load_json(timeConverter.StoD(sec))
+  texts = ""
+  for x,y in t.items():
+    texts += f'''{x.title()}: {y}, '''
+  return texts
+
 using(dth='667ff543-88a3-4550-bd78-6c461a8a7a41')
 
 emptyWD = {
@@ -35,7 +43,8 @@ if int(wdInfo['uWait']) <= time() and int(wdInfo['used']) >= int(settings['use']
   wdInfo['used'] = 0
 
 if int(wdInfo['used']) >= int(settings['use']) and int(settings['use']) > 0:
-  err(f'''Sorry, you must wait to use any workdays again.''')
+  wait = int(wdInfo['uWait']) - time()
+  err(f'''Sorry, you must wait to use any workdays again.\nTime to Wait: {timeCon(wait)}''')
 
 jobs = load_yaml(get_gvar("220dcf6e-6597-4695-9144-64dea6432a42"))
 
@@ -90,18 +99,25 @@ else:
   jname = job['name']
   up = {jname:gain}
   jobXP.update(up)
-ch.set_cvar(wjob, jobXP)
 
 wdInfo['wdays'] = int(wdInfo['wdays'])-day
 wdInfo['used'] = int(wdInfo['used']) + 1
 
+useWait = False
+if int(wdInfo['used']) >= int(settings['use']):
+  useWait = True
+  wdInfo['uWait'] = time() + (day * int(settings['useWait']))
+
 ch.set_cvar(wname, dump_json(wdInfo))
+ch.set_cvar(wjob, dump_json(jobXP))
 
 text += f''' -title "{name} Does Work: {job['name']}" '''
 text += f''' -desc "*{job['desc']}* \nLevel: {jobLevel}/{job['level']}" '''
 text += f''' -f "Checks|{''.join(checkList)}" '''
 text += f''' -f "Current XP: {jobXP[job['name']]} \nXP Gained: {gain}" '''
 text += f''' -f "Workdays Tracking|Current Workdays: {int(wdInfo['wdays'])//day} \nUsed Days: {wdInfo['used']}/{settings['use']}" '''
+if useWait:
+  text += f''' -f "You must wait {(int(settings['useWait'])*day)//day} before being able to use your workdays again. You can always use `!workdays` to try and reset it." '''
 
 return text
 </drac2>
