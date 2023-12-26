@@ -46,7 +46,8 @@ for x,y in enumerate(range(10)):
   if x > 2:
     levelList += x * scale
   else:
-    levelList += x * scale * inc
+    Inc = inc * scale
+    levelList += Inc * x
 err(levelList)
 
 if job['name'] not in jobXP:
