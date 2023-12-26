@@ -50,6 +50,7 @@ else:
   for jobLevel,x in enumerate(levelList):
     rJob = job['name']
     if int(jobLevel) >= int(jobXP[rjob]):
+      jobLeve; = max(1,jobLevel)
       break
     
 
