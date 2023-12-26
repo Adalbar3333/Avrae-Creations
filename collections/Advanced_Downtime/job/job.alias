@@ -49,7 +49,7 @@ if job['name'] not in jobXP:
 else:
   rJob = job['name']
   for jobLevel,x in enumerate(levelList):
-    if int(jobLevel) >= int(jobXP[rjob]):
+    if int(jobLevel) >= int(jobXP[rJob]):
       jobLevel = max(1,jobLevel)
       break
     
