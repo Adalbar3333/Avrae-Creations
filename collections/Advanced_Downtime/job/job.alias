@@ -66,10 +66,12 @@ for x in job['checks']:
 gain = xpGain
 if job['name'] in jobXP:
   jname = job['name']
-  jobXP[jname] = int(jobXP[jname]) + gain
+  up = {jname:int(jobXP[jname])+gain}
+  jobXP.update(up)
 else:
   jname = job['name']
-  jobXP[jname] = gain
+  up = {jname:gain}
+  jobXP.update(up)
 ch.set_cvar(wjob, jobXP)
 
 text += f''' -f "{''.join(checkList)}" '''
