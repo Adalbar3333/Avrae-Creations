@@ -30,6 +30,13 @@ if ctx.guild:
 
 wdInfo = load_yaml(ch.get_cvar(wname, emptyWD))
 
+if int(wdInfo['uWait']) <= time() and int(wdInfo['used']) >= int(settings['use']):
+  wdInfo['uWait'] = 0
+  wdInfo['used'] = 0
+
+if int(wdInfo['used']) >= int(settings['use']) and int(settings['use']) > 0:
+  err(f'''Sorry, you must wait to use any workdays again.''')
+
 jobs = load_yaml(get_gvar("220dcf6e-6597-4695-9144-64dea6432a42"))
 
 for x,y in jobs.items():
@@ -85,10 +92,14 @@ else:
   jobXP.update(up)
 ch.set_cvar(wjob, jobXP)
 
+wdInfo['wdays'] = int(wdInfo['wdays'])-day
+wdInfo['used'] = int(wdInfo['used']) + 1
+
 text += f''' -title "{name} Does Work: {job['name']}" '''
-text += f''' -desc "*{job['desc']}* \nMax Level: {job['level']}/{jobLevel}" '''
+text += f''' -desc "*{job['desc']}* \nLevel: {jobLevel}/{job['level']}" '''
 text += f''' -f "Checks|{''.join(checkList)}" '''
 text += f''' -f "Current XP: {jobXP[job['name']]} \nXP Gained: {gain}" '''
+text += f''' -f "Workdays Tracking|Current Workdays: {int(wdInfo['wdays'])//day} \nUsed Days: {wdInfo['used']}/{settings['use']}" '''
 
 return text
 </drac2>
