@@ -8,6 +8,7 @@ adv = a.adv(boolwise=True)
 mc = 0
 text = f""" -footer "Downtime|Adalbär3333" """
 req = '&1&'.lower()
+rr = min(A.last('rr', int, 1), 10)
 
 using(bagLib='4119d62e-6a98-4153-bea9-0a99bb36da2c')
 bags = bagLib.load_bags()
@@ -74,28 +75,31 @@ xpGain = 0
 coinGain = 0
 for x in job['checks']:
   if x['type'] == "tool":
-    check = dth.check(x['type'], x['check'], x['ability'], x['dc'], adv, a.get('b'), mc, addtools)
-    if check[1]:
-      droll = vroll(f"""{jobLevel}{x['dice']}""")
-      checkList += [f"""**{x['check']}:** {check[0]}\n{droll}\n{x['desc']}\n"""]
-      xpGain += int(check[2]) * droll.total
-      coinGain += droll.total
-    else:
-      droll = vroll(f"""{jobLevel}{x['dice']}""")
-      checkList += [f"""**{x['check']}:** ~~{check[0]}~~\n~~{droll}~~\n{x['desc']}\n"""]
-      xpGain -= int(check[2]) * droll.total
+    for range(rr):
+      check = dth.check(x['type'], x['check'], x['ability'], x['dc'], adv, a.get('b'), mc, addtools)
+      if check[1]:
+        droll = vroll(f"""{jobLevel}{x['dice']}""")
+        checkList += [f"""**{x['check']}:** {check[0]}\n{droll}"""]
+        xpGain += int(check[2]) * droll.total
+        coinGain += droll.total
+      else:
+        droll = vroll(f"""{jobLevel}{x['dice']}""")
+        checkList += [f"""**{x['check']}:** ~~{check[0]}~~\n~~{droll}~~"""]
+        xpGain -= int(check[2]) * droll.total
+    checkList += [f'''{x['desc']}\n''']
   else:
-    check = dth.check(x['type'], x['check'], None, x['dc'], adv, a.join('b', '+', '').strip('+'))
-    if check[1]:
-      droll = vroll(f"""{jobLevel}{x['dice']}""")
-      checkList += [f"""**{x['check']}:** {check[0]}\n{droll}\n{x['desc']}\n"""]
-      xpGain += int(check[2]) * droll.total
-      coinGain += droll.total
-    else:
-      droll = vroll(f"""{jobLevel}{x['dice']}""")
-      checkList += [f"""**{x['check']}:** ~~{check[0]}~~\n~~{droll}~~\n{x['desc']}\n"""]
-      xpGain -= int(check[2]) * droll.total
-
+    for range(rr):
+      check = dth.check(x['type'], x['check'], None, x['dc'], adv, a.join('b', '+', '').strip('+'))
+      if check[1]:
+        droll = vroll(f"""{jobLevel}{x['dice']}""")
+        checkList += [f"""**{x['check']}:** {check[0]}\n{droll}\n{x['desc']}\n"""]
+        xpGain += int(check[2]) * droll.total
+        coinGain += droll.total
+      else:
+        droll = vroll(f"""{jobLevel}{x['dice']}""")
+        checkList += [f"""**{x['check']}:** ~~{check[0]}~~\n~~{droll}~~\n{x['desc']}\n"""]
+        xpGain -= int(check[2]) * droll.total
+    checkList += [f'''{x['desc']}\n''']
 gain = xpGain
 if job['name'] in jobXP:
   jname = job['name']
@@ -119,13 +123,24 @@ ch.set_cvar(wjob, dump_json(jobXP))
 bagLib.modify_coins(bagsLoaded=bags, quantity=coinGain)
 
 coinDisp = bagLib.display_coins(bags,0)
-err(coinDisp)
 
 bagLib.save_bags(bags)
 
 text += f''' -title "{name} Does Work: {job['name']}" '''
 text += f''' -desc "*{job['desc']}* \nLevel: {jobLevel}/{job['level']}" '''
-text += f''' -f "Checks|{''.join(checkList)}" '''
+
+textDisp = '''-f "__**Checks**__| '''
+textList = []
+for x in checkList:
+  textDisp += f'{x}\n'
+  if len(textDisp) > 1000:
+    textDisp += '''"'''
+    textList += [textDisp]
+    textDisp = f''' -f "'''
+
+for x in textList:
+  text += x
+
 text += f''' -f "Current XP: {jobXP[job['name']]} \nXP Gained: {gain}\nCoin Gained: {coinGain}gp" '''
 text += f''' -f "Workdays Tracking|Current Workdays: {int(wdInfo['wdays'])//day} \nUsed Days: {wdInfo['used']}/{settings['use']}" '''
 if useWait:
