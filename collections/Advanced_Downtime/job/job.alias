@@ -85,7 +85,7 @@ for x in job['checks']:
         coinGain += droll.total
       else:
         droll = vroll(f"""{jobLevel}{x['dice']}""")
-        checkText += f"""~~{check[0]}~~\n~~{droll}~~"""
+        checkText += f"""~~{check[0]}~~\n~~{droll}~~\n"""
         xpGain -= int(check[2]) * droll.total
     checkList += [checkText]
     checkList += [f'''*{x['desc']}*\n''']
@@ -94,12 +94,12 @@ for x in job['checks']:
       check = dth.check(x['type'], x['check'], None, x['dc'], adv, a.join('b', '+', '').strip('+'))
       if check[1]:
         droll = vroll(f"""{jobLevel}{x['dice']}""")
-        checkText += f"""{check[0]}\n{droll}"""
+        checkText += f"""{check[0]}\n{droll}\n"""
         xpGain += int(check[2]) * droll.total
         coinGain += droll.total
       else:
         droll = vroll(f"""{jobLevel}{x['dice']}""")
-        checkText += f"""~~{check[0]}~~\n~~{droll}~~"""
+        checkText += f"""~~{check[0]}~~\n~~{droll}~~\n"""
         xpGain -= int(check[2]) * droll.total
     checkList += [checkText]
     checkList += [f'''*{x['desc']}*\n''']
@@ -138,12 +138,9 @@ for x in checkList:
   textDisp += f'{x}\n'
   if len(textDisp) > 800:
     textDisp += '''"'''
-    textList += [textDisp]
+    text += textDisp
     textDisp = f''' -f "'''
-textList += [textDisp+'"']
-
-for x in textList:
-  text += x
+text += textDisp
 
 text += f''' -f "{job['name']} XP: {jobXP[job['name']]} ({gain})\nCoin Gained: {coinGain}gp" '''
 text += f''' -f "Workdays Tracking|Current Workdays: {int(wdInfo['wdays'])//day} (-{rr}) \nUsed Days: {wdInfo['used']}/{settings['use']} (+{rr})" '''
