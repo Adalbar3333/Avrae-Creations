@@ -137,7 +137,7 @@ for x in checkList:
     textDisp += '''"'''
     textList += [textDisp]
     textDisp = f''' -f "'''
-textlist += [textDisp]
+textList += [textDisp]
 
 for x in textList:
   text += x
