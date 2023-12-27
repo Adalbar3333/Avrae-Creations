@@ -88,7 +88,7 @@ for x in job['checks']:
         checkText += f"""~~{check[0]}~~\n~~{droll}~~"""
         xpGain -= int(check[2]) * droll.total
     checkList += [checkText]
-    checkList += [f'''**{x['desc']}**\n''']
+    checkList += [f'''*{x['desc']}*\n''']
   else:
     for y in range(rr):
       check = dth.check(x['type'], x['check'], None, x['dc'], adv, a.join('b', '+', '').strip('+'))
@@ -102,7 +102,7 @@ for x in job['checks']:
         checkText += f"""~~{check[0]}~~\n~~{droll}~~"""
         xpGain -= int(check[2]) * droll.total
     checkList += [checkText]
-    checkList += [f'''**{x['desc']}**\n''']
+    checkList += [f'''*{x['desc']}*\n''']
 gain = xpGain
 if job['name'] in jobXP:
   jname = job['name']
