@@ -9,6 +9,9 @@ mc = 0
 text = f""" -footer "Downtime|Adalbär3333" """
 req = '&1&'.lower()
 
+using(bagLib='4119d62e-6a98-4153-bea9-0a99bb36da2c')
+bags = bagLib.load_bags()
+
 using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
 def timeCon(sec):
   t = load_json(timeConverter.StoD(sec))
@@ -113,6 +116,8 @@ if int(wdInfo['used']) >= int(settings['use']):
 
 ch.set_cvar(wname, dump_json(wdInfo))
 ch.set_cvar(wjob, dump_json(jobXP))
+bagLib.modify_coins(bagsLoaded: bags, quantity: coinGain)
+err(bags)
 
 text += f''' -title "{name} Does Work: {job['name']}" '''
 text += f''' -desc "*{job['desc']}* \nLevel: {jobLevel}/{job['level']}" '''
