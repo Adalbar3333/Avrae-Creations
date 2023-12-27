@@ -45,7 +45,7 @@ if int(wdInfo['uWait']) <= time() and int(wdInfo['used']) >= int(settings['use']
 waitText = ''
 if int(wdInfo['used']) >= int(settings['use']) and int(settings['use']) > 0:
   wait = int(wdInfo['uWait']) - time()
-  waitText = f'''Sorry, you must wait to use any workdays again.\nTime to Wait: {timeCon(wait)}''')
+  waitText = f'''Sorry, you must wait to use any workdays again.\nTime to Wait: {timeCon(wait)}'''
 
 last     = int(wdInfo['last'])
 workdays = int(wdInfo['wdays'])
