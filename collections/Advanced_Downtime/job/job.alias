@@ -118,7 +118,7 @@ ch.set_cvar(wname, dump_json(wdInfo))
 ch.set_cvar(wjob, dump_json(jobXP))
 bagLib.modify_coins(bagsLoaded=bags, quantity=coinGain)
 
-coinDisp = bagLib.display_coins(bags)
+coinDisp = bagLib.display_coins(bags,1)
 
 bagLib.save_bags(bags)
 
