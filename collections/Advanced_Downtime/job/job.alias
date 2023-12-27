@@ -145,7 +145,7 @@ textList += [textDisp+'"']
 for x in textList:
   text += x
 
-text += f''' -f "Current XP: {jobXP[job['name']]} \nXP Gained: {gain}\nCoin Gained: {coinGain}gp" '''
+text += f''' -f "{job['name']} XP: {jobXP[job['name']]} ({gain})\nCoin Gained: {coinGain}gp" '''
 text += f''' -f "Workdays Tracking|Current Workdays: {int(wdInfo['wdays'])//day} (-{rr}) \nUsed Days: {wdInfo['used']}/{settings['use']} (+{rr})" '''
 if useWait:
   text += f''' -f "You must wait {(int(settings['useWait'])*day)//day} before being able to use your workdays again. You can always use `!workdays` to try and reset it." '''
