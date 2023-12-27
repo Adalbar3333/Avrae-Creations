@@ -75,7 +75,7 @@ xpGain = 0
 coinGain = 0
 for x in job['checks']:
   if x['type'] == "tool":
-    for x in range(rr):
+    for y in range(rr):
       check = dth.check(x['type'], x['check'], x['ability'], x['dc'], adv, a.get('b'), mc, addtools)
       if check[1]:
         droll = vroll(f"""{jobLevel}{x['dice']}""")
@@ -88,7 +88,7 @@ for x in job['checks']:
         xpGain -= int(check[2]) * droll.total
     checkList += [f'''{x['desc']}\n''']
   else:
-    for x in range(rr):
+    for y in range(rr):
       check = dth.check(x['type'], x['check'], None, x['dc'], adv, a.join('b', '+', '').strip('+'))
       if check[1]:
         droll = vroll(f"""{jobLevel}{x['dice']}""")
