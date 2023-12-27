@@ -1,0 +1,153 @@
+embed 
+<drac2>
+A = &ARGS& 
+a = argparse(A)
+ch = character()
+day = 86400
+adv = a.adv(boolwise=True)
+mc = 0
+text = f""" -footer "Downtime|Adalbär3333" """
+req = '&1&'.lower()
+rr = min(a.last('rr', 1, int), 10)
+
+using(bagLib='4119d62e-6a98-4153-bea9-0a99bb36da2c')
+bags = bagLib.load_bags()
+
+using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
+def timeCon(sec):
+  t = load_json(timeConverter.StoD(sec))
+  texts = ""
+  for x,y in t.items():
+    texts += f'''{x.title()}: {y}, '''
+  return texts
+
+using(dth='667ff543-88a3-4550-bd78-6c461a8a7a41')
+
+emptyWD = {
+    "wdays": "0", "last": f"{floor(time())}", "used": "0", "uWait": "0"}
+
+wname = "Workdays"
+wjob = "Jobs"
+if ctx.guild:
+  wname = "Workdays_"+ctx.guild.id
+  wjob = "Jobs_"+ctx.guild.id
+
+NEW = False
+if not  ch.get_cvar(wname, False):
+  NEW = True
+
+settings = {"time":1,"wait":0,"limit":40, "use":40, "useWait":1}
+if ctx.guild:
+  settings = load_yaml(get_svar("workdaysSettings", settings))
+
+wdInfo = load_yaml(ch.get_cvar(wname, emptyWD))
+
+if int(wdInfo['uWait']) <= time() and int(wdInfo['used']) >= int(settings['use']):
+  wdInfo['uWait'] = 0
+  wdInfo['used'] = 0
+
+if int(wdInfo['used']) >= int(settings['use']) and int(settings['use']) > 0:
+  wait = int(wdInfo['uWait']) - time()
+  err(f'''Sorry, you must wait to use any workdays again.\nTime to Wait: {timeCon(wait)}''')
+
+if int(wdInfo['wdays']) < day*rr:
+  err(f"Sorry, but you do not have enough days to complete this task.\nCurrent Workdays: {int(wdInfo['wdays'])//day}")
+
+jobs = load_yaml(get_gvar("220dcf6e-6597-4695-9144-64dea6432a42"))
+
+for x,y in jobs.items():
+  if req in x.lower():
+    y['name'] = x
+    job = y
+
+jobXP = load_yaml(ch.get_cvar(wjob, {}))
+
+if job['name'] not in jobXP:
+  jobLevel = 1
+else:
+  jName = job['name']
+  jobLevel = min((int(jobXP[jName])//int(job['scale'])), int(job['level']))    
+  if jobLevel < 1:
+    jobLevel = 1
+
+checkList = []
+xpGain = 0
+coinGain = 0
+for x in job['checks']:
+  checkText = f"""**{x['check']}:**\n"""
+  if x['type'] == "tool":
+    for y in range(rr):
+      check = dth.check(x['type'], x['check'], x['ability'], x['dc'], adv, a.get('b'), mc, addtools)
+      if check[1]:
+        droll = vroll(f"""{jobLevel}{x['dice']}""")
+        checkText += f"""{check[0]}\n{droll}\n"""
+        xpGain += int(check[2]) * droll.total
+        coinGain += droll.total
+      else:
+        droll = vroll(f"""{jobLevel}{x['dice']}""")
+        checkText += f"""~~{check[0]}~~\n~~{droll}~~\n"""
+        xpGain -= int(check[2]) * droll.total
+    checkList += [checkText]
+    checkList += [f'''*{x['desc']}*\n''']
+  else:
+    for y in range(rr):
+      check = dth.check(x['type'], x['check'], None, x['dc'], adv, a.join('b', '+', '').strip('+'))
+      if check[1]:
+        droll = vroll(f"""{jobLevel}{x['dice']}""")
+        checkText += f"""{check[0]}\n{droll}\n"""
+        xpGain += int(check[2]) * droll.total
+        coinGain += droll.total
+      else:
+        droll = vroll(f"""{jobLevel}{x['dice']}""")
+        checkText += f"""~~{check[0]}~~\n~~{droll}~~\n"""
+        xpGain -= int(check[2]) * droll.total
+    checkList += [checkText]
+    checkList += [f'''*{x['desc']}*\n''']
+gain = xpGain
+if job['name'] in jobXP:
+  jname = job['name']
+  up = {jname:int(jobXP[jname])+gain}
+  jobXP.update(up)
+else:
+  jname = job['name']
+  up = {jname:gain}
+  jobXP.update(up)
+
+wdInfo['wdays'] = int(wdInfo['wdays'])-(day*rr)
+wdInfo['used'] = int(wdInfo['used']) + (1*rr)
+
+useWait = False
+if int(wdInfo['used']) >= int(settings['use']):
+  useWait = True
+  wdInfo['uWait'] = time() + (day * int(settings['useWait']))
+
+ch.set_cvar(wname, dump_json(wdInfo))
+ch.set_cvar(wjob, dump_json(jobXP))
+bagLib.modify_coins(bagsLoaded=bags, quantity=coinGain)
+
+coinDisp = bagLib.display_coins(bags,0)
+
+bagLib.save_bags(bags)
+
+text += f''' -title "{name} Does Work: {job['name']}" '''
+text += f''' -desc "*{job['desc']}* \nLevel: {jobLevel}/{job['level']}" '''
+
+textDisp = '''-f "__**Checks**__| '''
+textList = []
+for x in checkList:
+  if len(textDisp) > 600:
+    textDisp += '''"'''
+    text += textDisp
+    textDisp = f''' -f "'''
+  else:
+    textDisp += f'{x}\n'
+text += textDisp+'"'
+
+text += f''' -f "{job['name']} XP: {jobXP[job['name']]} ({gain})\nCoin Gained: {coinGain}gp" '''
+text += f''' -f "Workdays Tracking|Current Workdays: {int(wdInfo['wdays'])//day} (-{rr}) \nUsed Days: {wdInfo['used']}/{settings['use']} (+{rr})" '''
+if useWait:
+  text += f''' -f "You must wait {(int(settings['useWait'])*day)//day} before being able to use your workdays again. You can always use `!workdays` to try and reset it." '''
+text += coinDisp[0]
+
+return text
+</drac2>
