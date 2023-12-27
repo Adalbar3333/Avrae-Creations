@@ -74,7 +74,7 @@ checkList = []
 xpGain = 0
 coinGain = 0
 for x in job['checks']:
-  checkText = f"""**(x['check']}**"""
+  checkText = f"""**{x['check']}**"""
   if x['type'] == "tool":
     for y in range(rr):
       check = dth.check(x['type'], x['check'], x['ability'], x['dc'], adv, a.get('b'), mc, addtools)
