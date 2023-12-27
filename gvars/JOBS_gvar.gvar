@@ -1,0 +1,120 @@
+Bartending:
+  desc: You work as a bar tender serving drinks, talking to people, and ensuring the bar is having a good time.
+  scale: 240
+  level: 5
+  checks:
+  - type: skill
+    check: Sleight of Hand
+    dice: d4
+    dc: 10
+    desc: You take the time to carry drinks around the bar, and pour drinks for the patrons.
+  - type: skill
+    check: Persuasion
+    dice: d2
+    dc: 12
+    desc: Conversing with the patrons and making them happy can often lead to tips.
+  - type: skill
+    check: Insight
+    dice: d2
+    dc: 14
+    desc: Somtimes, mixing drinks takes some extra practice. This extra skill and stufy of the perfect drink can result in extra tips.
+
+Investigation/Bounty Hunting:
+  desc: You work as a mercenary or part of the City Watch to patrol and investigate the streets for any wanted individuals or crimes potentially lurking or happening.
+  scale: 3240
+  level: 8
+  checks:
+  - type: skill
+    check: Investigation
+    dice: d6
+    dc: 10
+    desc: You take the time to find any clues or leads to a certain case or bounty you're assigned to.
+  - type: skill
+    check: Perception
+    dice: d2
+    dc: 12
+    desc: Staying vigilant and looking out for any wanted miscreants in the urban landscape is always a must.
+  - type: skill
+    check: Athletics
+    dice: d6
+    dc: 16
+    desc: You often have to chase after fugitives and capture them forcefully.
+  - type: skill
+    check: Insight
+    dice: d4
+    dc: 14
+    desc: When necessary, getting a lead from word of mouth may need a few guesses to identify an individual's credence to their claims.
+
+"Tailor's Assistant":
+  desc: You work with a Tailor to work on clothes, and making sure that the clotes are fitted and organized in the shop.
+  scale: 420
+  level: 5
+  checks: 
+  - type: tool
+    check: Weaver's Tools
+    ability: dexterity
+    dice: d8
+    dc: 14
+    desc: You help tailor the clothes together, making sure they sit right on customers and applying easy changes to the clothes.
+  - type: skill
+    check: Persuasion
+    dice: d2
+    dc: 10
+    desc: Talking with customers while you do their work can often lead to tips. 
+  - type: skill
+    check: Sleight of Hand
+    dice: d4
+    dc: 12
+    desc: Sometime you must handle fine tools while working as a Tailor's Assistant.
+
+Traveling Doctor:
+  desc: You travel all across Tazzurath and help out people with your medical expertise
+  scale: 6800
+  level: 10
+  checks:
+  - type: skill
+    check: Medicine
+    dice: d6
+    dc: 10
+    desc: You take the time to accurately diagnose a patient's illness or tend to one's wound.
+  - type: skill
+    check: Survival
+    dice: d4
+    dc: 12
+    desc: When travelling, you often have to forage for herbs and materials for your medical supplies.
+  - type: skill
+    check: Nature
+    dice: d6
+    dc: 14
+    desc: In your travels, you'll encounter people who's been poisoned and you help them through identifying the poison and their antidote/rememdy for it.
+
+Librarian:
+  desc: You work as a librarian to guide visitors to several sections of the library or catalogue books in their right place.
+  scale: 3500
+  level: 12
+  checks:
+  - type: skill
+    check: Arcana
+    dice: d6
+    dc: 14
+    desc: You guide and provide some insight for visitors to the various arcane lore, whether it be eldritch findings to biographies of various mages of old. You also research and catalogue the various reading materials under this category.
+  - type: skill
+    check: History
+    dice: d6
+    dc: 12
+    desc: You guide and provide some insight for visitors towards the right section the falls under the historical category; you also catalogue reading materials appropriate subcategories.
+  - type: skill
+    check: Religion
+    dice: d6
+    dc: 14
+    desc: You guide visitors to sacred texts and relics that are stored in the library; and you also guide and give insights of information about these religious material.
+  - type: skill
+    check: Nature
+    dice: d6
+    dc: 14
+    desc: You guide visitors to the appropriate subcategories in the nature categories and give them accurate answers to their queries related to the materials under the nature category. 
+  - type: tool
+    check: Calligraphy Supplies
+    dice: d4
+    dc: 10
+    desc: You analyze books and scrolls; make footnotes or little summarized notes of them to the visitor's convivence.
