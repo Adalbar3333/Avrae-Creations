@@ -50,7 +50,7 @@ if int(wdInfo['used']) >= int(settings['use']) and int(settings['use']) > 0:
   wait = int(wdInfo['uWait']) - time()
   err(f'''Sorry, you must wait to use any workdays again.\nTime to Wait: {timeCon(wait)}''')
 
-if int(wdInfo['wdays']) < day:
+if int(wdInfo['wdays']) < day*rr:
   err(f"Sorry, but you do not have enough days to complete this task.\nCurrent Workdays: {int(wdInfo['wdays'])//day}")
 
 jobs = load_yaml(get_gvar("220dcf6e-6597-4695-9144-64dea6432a42"))
@@ -74,7 +74,7 @@ checkList = []
 xpGain = 0
 coinGain = 0
 for x in job['checks']:
-  checkText = f"""**{x['check']}**"""
+  checkText = f"""**{x['check']}:**\n"""
   if x['type'] == "tool":
     for y in range(rr):
       check = dth.check(x['type'], x['check'], x['ability'], x['dc'], adv, a.get('b'), mc, addtools)
@@ -113,8 +113,8 @@ else:
   up = {jname:gain}
   jobXP.update(up)
 
-wdInfo['wdays'] = int(wdInfo['wdays'])-day
-wdInfo['used'] = int(wdInfo['used']) + 1
+wdInfo['wdays'] = int(wdInfo['wdays'])-(day*rr)
+wdInfo['used'] = int(wdInfo['used']) + (1*rr)
 
 useWait = False
 if int(wdInfo['used']) >= int(settings['use']):
