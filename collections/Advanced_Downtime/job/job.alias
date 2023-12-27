@@ -137,6 +137,7 @@ for x in checkList:
     textDisp += '''"'''
     textList += [textDisp]
     textDisp = f''' -f "'''
+textlist += [textDisp]
 
 err(textList)
 
