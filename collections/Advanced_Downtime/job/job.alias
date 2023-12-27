@@ -135,7 +135,7 @@ text += f''' -desc "*{job['desc']}* \nLevel: {jobLevel}/{job['level']}" '''
 textDisp = '''-f "__**Checks**__| '''
 textList = []
 for x in checkList:
-  if len(textDisp) > 800:
+  if len(textDisp) > 600:
     textDisp += '''"'''
     text += textDisp
     textDisp = f''' -f "'''
