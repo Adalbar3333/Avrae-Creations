@@ -116,7 +116,7 @@ if int(wdInfo['used']) >= int(settings['use']):
 
 ch.set_cvar(wname, dump_json(wdInfo))
 ch.set_cvar(wjob, dump_json(jobXP))
-bagLib.modify_coins(bagsLoaded: bags, quantity: coinGain)
+coins = bagLib.modify_coins(bagsLoaded: bags, quantity: coinGain)
 err(bags)
 
 text += f''' -title "{name} Does Work: {job['name']}" '''
