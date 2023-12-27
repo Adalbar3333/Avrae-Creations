@@ -88,7 +88,7 @@ for x in job['checks']:
         checkText += f"""~~{check[0]}~~\n~~{droll}~~"""
         xpGain -= int(check[2]) * droll.total
     checkList += [checkText]
-    checkList += [f'''{x['desc']}\n''']
+    checkList += [f'''**{x['desc']}**\n''']
   else:
     for y in range(rr):
       check = dth.check(x['type'], x['check'], None, x['dc'], adv, a.join('b', '+', '').strip('+'))
@@ -102,7 +102,7 @@ for x in job['checks']:
         checkText += f"""~~{check[0]}~~\n~~{droll}~~"""
         xpGain -= int(check[2]) * droll.total
     checkList += [checkText]
-    checkList += [f'''{x['desc']}\n''']
+    checkList += [f'''**{x['desc']}**\n''']
 gain = xpGain
 if job['name'] in jobXP:
   jname = job['name']
@@ -146,7 +146,7 @@ for x in textList:
   text += x
 
 text += f''' -f "Current XP: {jobXP[job['name']]} \nXP Gained: {gain}\nCoin Gained: {coinGain}gp" '''
-text += f''' -f "Workdays Tracking|Current Workdays: {int(wdInfo['wdays'])//day} \nUsed Days: {wdInfo['used']}/{settings['use']}" '''
+text += f''' -f "Workdays Tracking|Current Workdays: {int(wdInfo['wdays'])//day} (-{rr}) \nUsed Days: {wdInfo['used']}/{settings['use']} (+{rr})" '''
 if useWait:
   text += f''' -f "You must wait {(int(settings['useWait'])*day)//day} before being able to use your workdays again. You can always use `!workdays` to try and reset it." '''
 text += coinDisp[0]
