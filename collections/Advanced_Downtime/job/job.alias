@@ -118,18 +118,18 @@ ch.set_cvar(wname, dump_json(wdInfo))
 ch.set_cvar(wjob, dump_json(jobXP))
 bagLib.modify_coins(bagsLoaded=bags, quantity=coinGain)
 
-coinDisp = bagLib.display_coins(bags,1)
+coinDisp = bagLib.display_coins(bags,0)
 
 bagLib.save_bags(bags)
 
 text += f''' -title "{name} Does Work: {job['name']}" '''
 text += f''' -desc "*{job['desc']}* \nLevel: {jobLevel}/{job['level']}" '''
 text += f''' -f "Checks|{''.join(checkList)}" '''
-text += f''' -f "Current XP: {jobXP[job['name']]} \nXP Gained: {gain}" '''
+text += f''' -f "Current XP: {jobXP[job['name']]} \nXP Gained: {gain}\nCoin Gained: {coinGain}gp" '''
 text += f''' -f "Workdays Tracking|Current Workdays: {int(wdInfo['wdays'])//day} \nUsed Days: {wdInfo['used']}/{settings['use']}" '''
 if useWait:
   text += f''' -f "You must wait {(int(settings['useWait'])*day)//day} before being able to use your workdays again. You can always use `!workdays` to try and reset it." '''
-text += f''' -f "Coin Gain: {coinGain}gp|{coinDisp}" '''
+text += coinDisp[0]
 
 return text
 </drac2>
