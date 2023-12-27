@@ -139,8 +139,6 @@ for x in checkList:
     textDisp = f''' -f "'''
 textlist += [textDisp]
 
-err(textList)
-
 for x in textList:
   text += x
 
