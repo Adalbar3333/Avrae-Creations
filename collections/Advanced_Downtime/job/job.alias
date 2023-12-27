@@ -133,7 +133,7 @@ textDisp = '''-f "__**Checks**__| '''
 textList = []
 for x in checkList:
   textDisp += f'{x}\n'
-  if len(textDisp) > 1000:
+  if len(textDisp) > 800:
     textDisp += '''"'''
     textList += [textDisp]
     textDisp = f''' -f "'''
