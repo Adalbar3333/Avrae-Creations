@@ -138,6 +138,8 @@ for x in checkList:
     textList += [textDisp]
     textDisp = f''' -f "'''
 
+err(textList)
+
 for x in textList:
   text += x
 
