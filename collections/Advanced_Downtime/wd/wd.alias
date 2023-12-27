@@ -39,6 +39,14 @@ if ctx.guild:
 
 wdInfo = load_yaml(ch.get_cvar(wname, emptyWD))
 
+if int(wdInfo['uWait']) <= time() and int(wdInfo['used']) >= int(settings['use']):
+  wdInfo['uWait'] = 0
+  wdInfo['used'] = 0
+waitText = ''
+if int(wdInfo['used']) >= int(settings['use']) and int(settings['use']) > 0:
+  wait = int(wdInfo['uWait']) - time()
+  waitText = f'''Sorry, you must wait to use any workdays again.\nTime to Wait: {timeCon(wait)}''')
+
 last     = int(wdInfo['last'])
 workdays = int(wdInfo['wdays'])
 
@@ -54,7 +62,7 @@ text += f''' -f "__Simplified Days:__ {int(workdays)//(day*int(settings['time'])
 
 if amt > 0:
   text += f''' -f "__Manuel Adjustment:__ {amt/day} Days" '''
-text += f''' -f "Server: {ctx.guild.name if ctx.guild else 'None'}" '''
+text += f''' -f "Server: {ctx.guild.name if ctx.guild else 'None'}\n\n{waitText}" '''
 
 if NEW:
   text += f''' -f "Created CVAR for workdays for the following server {ctx.guild.name if ctx.guild else 'Personal Messages'}." '''
