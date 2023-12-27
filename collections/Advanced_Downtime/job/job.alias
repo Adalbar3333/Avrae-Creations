@@ -140,7 +140,7 @@ for x in checkList:
     textDisp += '''"'''
     text += textDisp
     textDisp = f''' -f "'''
-text += textDisp
+text += textDisp+'"'
 
 text += f''' -f "{job['name']} XP: {jobXP[job['name']]} ({gain})\nCoin Gained: {coinGain}gp" '''
 text += f''' -f "Workdays Tracking|Current Workdays: {int(wdInfo['wdays'])//day} (-{rr}) \nUsed Days: {wdInfo['used']}/{settings['use']} (+{rr})" '''
