@@ -126,7 +126,6 @@ ch.set_cvar(wjob, dump_json(jobXP))
 bagLib.modify_coins(bagsLoaded=bags, quantity=coinGain)
 
 coinDisp = bagLib.display_coins(bags,0)
-
 bagLib.save_bags(bags)
 
 text += f''' -title "{name} Does Work: {job['name']}" '''
