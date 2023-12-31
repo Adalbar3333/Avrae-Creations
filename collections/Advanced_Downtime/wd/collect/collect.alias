@@ -14,6 +14,7 @@ for x in baseCollect:
     refineList += x
 
 if a.get('collect'): 
+  err("FUCK")
   pArgs = []
   for x in collectList:
     pArgs += x['action'].split(' ')
