@@ -18,9 +18,6 @@ if a.get('collect'):
   for x in collectList:
     pArgs += x['action'].split(' ')
     err(pArgs)
-if a.get('refine'):
-  err('Not Yet!!!')
-
 
 return f''' -title "NO" '''
 </drac2>
