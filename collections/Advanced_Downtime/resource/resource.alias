@@ -16,7 +16,7 @@ for x in baseCollect:
 if a.get('collect'): 
   pArgs = []
   for x in collectList:
-    pArgs += x['action'].split(' ')
+    pArgs += ' '.split(x['action'])
     err(pArgs)
 
 return f''' -title "NO" '''
