@@ -15,7 +15,9 @@ if a.get('collect'):
   pArgs = []
   for x in collectList:
     pArgs += x['action'].split(' ')
-    err(pArgs)
+  lookArgs = argparse(pArgs)
+  if lookArgs.get('&2&'):
+    err("GOOD!!!")
 
 return f''' -title "NO" '''
 </drac2>
