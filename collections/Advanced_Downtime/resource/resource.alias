@@ -16,6 +16,7 @@ for x in baseCollect:
 if a.get('collect'): 
   pArgs = []
   for x in collectList:
+    err(dump_json(x))
     pArgs += ' '.split(x['action'])
     err(pArgs)
 
