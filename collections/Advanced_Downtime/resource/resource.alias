@@ -9,15 +9,14 @@ collectList = []
 refineList = []
 for x in baseCollect:
   if x['atype'] == 'collect':
-    collectList += x
+    collectList += {x}
   if x['atype'] == 'refine':
-    refineList += x
+    refineList += {x}
 
 if a.get('collect'): 
   pArgs = []
-  for x in collectList['action']:
-    err(dump_json(x))
-    pArgs += ' '.split(x['action'])
+  for x in collectList:
+    pArgs += x['action'].split(' ')
     err(pArgs)
 
 return f''' -title "NO" '''
