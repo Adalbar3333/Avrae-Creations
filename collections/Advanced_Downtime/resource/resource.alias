@@ -10,11 +10,10 @@ refineList = []
 for x in baseCollect:
   if x['atype'] == 'collect':
     collectList += x
-  if x x['atype'] == 'refine':
+  if x['atype'] == 'refine':
     refineList += x
 
 if a.get('collect'): 
-  err("FUCK")
   pArgs = []
   for x in collectList:
     pArgs += x['action'].split(' ')
