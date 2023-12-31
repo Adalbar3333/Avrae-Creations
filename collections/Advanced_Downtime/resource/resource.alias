@@ -1,4 +1,4 @@
-embed <drac2>
+ embed <drac2>
 A = &ARGS&
 a = argparse(A)
 ch = character()
@@ -6,12 +6,10 @@ ch = character()
 baseCollect = load_yaml(get_gvar('5cc7f466-d74a-465f-b8e9-68dcf87240ef'))
 
 collectList = []
-refineList = []
 for x in baseCollect:
   if x['atype'] == 'collect':
-    collectList += {x}
-  if x['atype'] == 'refine':
-    refineList += {x}
+    collectList += [x]
+
 
 if a.get('collect'): 
   pArgs = []
