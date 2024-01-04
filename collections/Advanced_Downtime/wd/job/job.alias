@@ -64,7 +64,7 @@ if a.get('help') or not A:
   text += f''' -desc "You can do work for any of the jobs connected to the server. \n**Avaliable Arguments:** Bonus: `-b` adds a bonus to your roll. Supports Dice and multiple arguments.\nAdvantage/Disadvantage `-dis/adv` adds advantage or disadvantage to the roll." '''
   text += f''' -f "Avaliable Jobs|{', '.join(jList)}"'''
   text += f''' -f "DM Tools|You can set a SVAR with one of the following detials in it:"'''
-  for x,y in jobs:
+  for x,y in jobs.items():
     if x == "Example":
       etext = f'''{x}:\n  {y}'''
   text += f''' -f "SVAR = ServerJobs|{etext}"'''
