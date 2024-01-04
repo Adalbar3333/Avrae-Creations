@@ -1,4 +1,4 @@
- embed <drac2>
+embed <drac2>
 A = &ARGS&
 a = argparse(A)
 ch = character()
@@ -11,13 +11,15 @@ for x in baseCollect:
     collectList += [x]
 
 
-if a.get('collect'): 
+if a.get('collect'):
   pArgs = []
-  for x in collectList:
-    pArgs += x['action'].split(' ')
+for x in collectList:
+  pArgs += x['action'].split(' ')
   lookArgs = argparse(pArgs)
-  if lookArgs.get('&2&'):
-    err("GOOD!!!")
+if lookArgs.get('&2&'):
+  err("GOOD!!!")
+
+
 
 return f''' -title "NO" '''
 </drac2>
