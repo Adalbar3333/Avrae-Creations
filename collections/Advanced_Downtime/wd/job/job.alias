@@ -71,7 +71,7 @@ if a.get('help') or not a:
   text += f''' -f "SVAR = Workdays|Add a dict which says `jobs:`. This can be a list of GVARs you have made with jobs as displayed above. All example jobs can be found [here](https://avrae.io/dashboard/gvars?lookup=220dcf6e-6597-4695-9144-64dea6432a42)"'''
   return text
 
-del jobs['Example']
+jobs = {key: jobs[key] for key in jobs if key != "Example"}
 
 for x,y in jobs.items():
   if req in x.lower():
