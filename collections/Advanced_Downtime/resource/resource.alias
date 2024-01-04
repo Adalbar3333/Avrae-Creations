@@ -13,11 +13,11 @@ for x in baseCollect:
 
 if a.get('collect'):
   pArgs = []
-for x in collectList:
-  pArgs += x['action'].split(' ')
-  lookArgs = argparse(pArgs)
-if lookArgs.get('&2&'):
-  err("GOOD!!!")
+  for x in collectList:
+    pArgs += x['action'].split(' ')
+    lookArgs = argparse(pArgs)
+  if lookArgs.get('&2&'):
+    err("GOOD!!!")
 
 
 
