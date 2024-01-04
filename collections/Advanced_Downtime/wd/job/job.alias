@@ -55,7 +55,7 @@ if int(wdInfo['wdays']) < day*rr:
 
 jobs = load_yaml(get_gvar("220dcf6e-6597-4695-9144-64dea6432a42"))
 
-if a.get('help') or not a:
+if a.get('help') or not A:
   text += f''' -title "{name} is looking for Work!!!"'''
   jList = []
   for n,x in jobs.items():
