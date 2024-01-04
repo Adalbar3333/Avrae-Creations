@@ -1,3 +1,14 @@
+Example:
+  desc: Description of the Job!
+  scale: int -> Realitave XP required to level up.
+  level: int -> Maximum Level for job. 
+  checks: 
+  - type: skill|tool
+    check: Check Name -> Perception
+    dice: dY -> Size of dice that the character will gain in gold and job xp. 
+    dc: int -> Difficulty Class for the check. 
+    desc: Description of the Check. 
+
 Bartending:
   desc: You work as a bar tender serving drinks, talking to people, and ensuring the bar is having a good time.
   scale: 240
