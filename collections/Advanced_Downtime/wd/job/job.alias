@@ -67,7 +67,7 @@ if a.get('help') or not A:
   for x,y in jobs.items():
     if x == "Example":
       etext = {x:y}
-  text += f''' -f "SVAR = ServerJobs|{dump_yaml(etext)}"'''
+  text += f''' -f "SVAR = ServerJobs|```ymal\n{dump_yaml(etext)}```"'''
   text += f''' -f "SVAR = Workdays|Add a dict which says `jobs:`. This can be a list of GVARs you have made with jobs as displayed above. All example jobs can be found [here](https://avrae.io/dashboard/gvars?lookup=220dcf6e-6597-4695-9144-64dea6432a42)"'''
   return text
 
