@@ -64,6 +64,8 @@ workdays = int(wdInfo['wdays'])
 wdInfo['last'] = int(time())
 plusTime = min((int(amt) + int(time()) * int(settings["time"]) - (int(last) * int(settings["time"]))), int(amt) + (int(settings['limit'])*int(settings['time']*day)))
 
+err(plusTime)
+
 workdays = int(workdays+plusTime)
 wdInfo['wdays'] = workdays
 ch.set_cvar(f'{wname}',wdInfo)
