@@ -62,7 +62,7 @@ last     = int(wdInfo['last'])
 workdays = int(wdInfo['wdays'])
 
 wdInfo['last'] = int(time())
-plusTime = min((int(amt) + int(time()) * int(settings["time"]) - int(last)), int(amt) + (int(settings['limit'])*int(settings['time']*day)))
+plusTime = min((int(amt) + int(time()) * int(settings["time"]) - (int(last) * int(settings["time"]))), int(amt) + (int(settings['limit'])*int(settings['time']*day)))
 
 workdays = int(workdays+plusTime)
 wdInfo['wdays'] = workdays
