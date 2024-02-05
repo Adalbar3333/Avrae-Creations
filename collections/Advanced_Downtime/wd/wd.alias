@@ -35,7 +35,7 @@ if int(wdi['uWait']) <= time() and int(wdi['used']) >= int(setts['use']):
 wt = ''
 if int(wdi['used']) >= int(setts['use']) and int(setts['use']) > 0:
     wait = int(wdi['uWait']) - time()
-    wt = f"Wait: {tc(wait)}"
+    wt = f"""Wait: {tc(wait)}"""
 
 last = int(wdi['last'])
 wdays = int(wdi['wdays'])
@@ -47,15 +47,15 @@ wdays += pTime
 wdi['wdays'] = wdays
 ch.set_cvar(wdn, dump_json(wdi))
 
-txt += f'-title "Workdays: {ch.name}" '
-txt += f'-f "Days: {wdays//(day_s*int(setts['time']))}, Added: {tc(pTime)}"'
+txt += f""" -title "Workdays: {ch.name}" """
+txt += f""" -f "Days: {wdays//(day_s*int(setts['time']))}, Added: {tc(pTime)}" """
 
 if amt > 0:
-    txt += f' -f "Adjustment: {amt/day_s} Days" '
-txt += f' -f "Server: {ctx.guild.name if ctx.guild else "None"}\n\n{wt}" '
+    txt += f""" -f "Adjustment: {amt/day_s} Days" """
+txt += f""" -f "Server: {ctx.guild.name if ctx.guild else 'None'}\n\n{wt}" """
 
 if new_wd:
-    txt += f' -f "Initialized workdays for {ctx.guild.name if ctx.guild else "PMs"}." '
+    txt += f""" -f "Initialized Workdays for {ctx.guild.name if ctx.guild else 'PMs'}." """
 
 return txt
 </drac2>
