@@ -69,7 +69,7 @@ wdInfo['wdays'] = workdays
 ch.set_cvar(f'{wname}',wdInfo)
 
 text += f'''-title "Workdays Tracker: {name}" '''
-text += f''' -f "__Simplified Days:__ {int(workdays)//(day*int(settings['time']))}\n\n__Current Workdays:__ {timeCon(int(workdays))}\n__Added Time:__ {timeCon(int(plusTime))}"'''
+text += f''' -f "__Simplified Days:__ {int(workdays)//(day*int)}\n\n__Current Workdays:__ {timeCon(int(workdays))}\n__Added Time:__ {timeCon(int(plusTime))}"'''
 
 if amt > 0:
   text += f''' -f "__Manuel Adjustment:__ {amt/day} Days" '''
