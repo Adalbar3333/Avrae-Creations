@@ -1,82 +1,61 @@
 embed
 <drac2>
-A    = &ARGS&
-a    = argparse(A)
-ch   = character()
-day  = 86400
-text = ""
- 
-emptyWD = {
-    "wdays": "0", "last": f"{floor(time())}", "used": "0", "uWait": "0"}
+args = &ARGS&
+ap = argparse(args)
+ch = character()
+day_s = 86400
+txt = ""
 
-wname = "Workdays"
-if ctx.guild:
-  wname = "Workdays_"+ctx.guild.id
+def_wd = {"wdays": "0", "last": str(floor(time())), "used": "0", "uWait": "0"}
+wdn = f"Workdays_{ctx.guild.id}" if ctx.guild else "Workdays"
+new_wd = not ch.get_cvar(wdn, False)
 
-NEW = False
-if not  ch.get_cvar(f'{wname}', False):
-  NEW = True
-
-amt = 0 
-if A:
-  if '&1&' in '-+' and '&2&'.isdecimal():
-    amt = int('&1&'+'&2&')
-  else:
-    amt = int('&1&') if '&1&'.strip('+-').isdecimal else 0
-amt = amt*day
+amt = 0
+if args and '&1&' in '-+' and '&2&'.isdecimal():
+    amt = int('&1&' + '&2&') * day_s
+elif args and '&1&'.strip('+-').isdecimal():
+    amt = int('&1&') * day_s
 
 using(timeConverter='e84d5d89-2fc7-4a14-be7a-cd73f2657cee')
-def timeCon(sec):
-  t = load_json(timeConverter.StoD(sec))
-  texts = ""
-  for x,y in t.items():
-    texts += f'''{x.title()}: {y}, '''
-  return texts
+def tc(sec):
+    td = load_json(timeConverter.StoD(sec))
+    return ', '.join(f"{k.title()}: {v}" for k, v in td.items())
 
-settings = {"time":1,"wait":0,"limit":40, "use":40, "useWait":1}
-if ctx.guild:
-  settings = load_yaml(get_svar("workdaysSettings", settings))
-
-wdInfo = load_yaml(ch.get_cvar(wname, emptyWD))
-
-
-def is_float(string):
-    if string.replace(".", "").isnumeric():
-        return True
-    else:
-        return False
+setts = load_yaml(get_svar("workdaysSettings", {"time":1, "wait":0, "limit":40, "use":40, "useWait":1}))
+wdi = load_yaml(ch.get_cvar(wdn, def_wd))
 
 if is_float(ch.get_cvar("Workdays")):
-  wdInfo = emptyWD
-  wdInfo['wdays'] = floor(ch.get_cvar('Workdays'))
+    wdi = def_wd
+    wdi['wdays'] = floor(ch.get_cvar('Workdays'))
 
-if int(wdInfo['uWait']) <= time() and int(wdInfo['used']) >= int(settings['use']):
-  wdInfo['uWait'] = 0
-  wdInfo['used'] = 0
-waitText = ''
-if int(wdInfo['used']) >= int(settings['use']) and int(settings['use']) > 0:
-  wait = int(wdInfo['uWait']) - time()
-  waitText = f'''Sorry, you must wait to use any workdays again.\nTime to Wait: {timeCon(wait)}'''
+if int(wdi['uWait']) <= time() and int(wdi['used']) >= int(setts['use']):
+    wdi['uWait'] = 0
+    wdi['used'] = 0
 
-last     = int(wdInfo['last'])
-workdays = int(wdInfo['wdays'])
+wt = ''
+if int(wdi['used']) >= int(setts['use']) and int(setts['use']) > 0:
+    wait = int(wdi['uWait']) - time()
+    wt = f"Wait: {tc(wait)}"
 
-wdInfo['last'] = int(time())
-plusTime = min((int(amt) + int(time()) * int(settings["time"]) - (int(last) * int(settings["time"]))), int(amt) + (int(settings['limit'])*int(settings['time']*day)))
+last = int(wdi['last'])
+wdays = int(wdi['wdays'])
 
-workdays = int(workdays+plusTime)
-wdInfo['wdays'] = workdays
-ch.set_cvar(f'{wname}',wdInfo)
+wdi['last'] = int(time())
+pTime = min(amt + int(time()) * int(setts["time"]) - (last * int(setts["time"])), amt + (int(setts['limit'])*int(setts['time']*day_s)))
 
-text += f'''-title "Workdays Tracker: {name}" '''
-text += f''' -f "__Simplified Days:__ {int(workdays)//(day*int(settings['time']))}\n\n__Current Workdays:__ {timeCon(int(workdays))}\n__Added Time:__ {timeCon(int(plusTime))}"'''
+wdays += pTime
+wdi['wdays'] = wdays
+ch.set_cvar(wdn, dump_json(wdi))
+
+txt += f'-title "Workdays: {ch.name}" '
+txt += f'-f "Days: {wdays//(day_s*int(setts['time']))}, Added: {tc(pTime)}"'
 
 if amt > 0:
-  text += f''' -f "__Manuel Adjustment:__ {amt/day} Days" '''
-text += f''' -f "Server: {ctx.guild.name if ctx.guild else 'None'}\n\n{waitText}" '''
+    txt += f' -f "Adjustment: {amt/day_s} Days" '
+txt += f' -f "Server: {ctx.guild.name if ctx.guild else "None"}\n\n{wt}" '
 
-if NEW:
-  text += f''' -f "Created CVAR for workdays for the following server {ctx.guild.name if ctx.guild else 'Personal Messages'}." '''
+if new_wd:
+    txt += f' -f "Initialized workdays for {ctx.guild.name if ctx.guild else "PMs"}." '
 
-return text
+return txt
 </drac2>
