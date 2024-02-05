@@ -24,7 +24,8 @@ def tc(sec):
 setts = load_yaml(get_svar("workdaysSettings", {"time":1, "wait":0, "limit":40, "use":40, "useWait":1}))
 wdi = load_yaml(ch.get_cvar(wdn, def_wd))
 
-if is_float(ch.get_cvar("Workdays")):
+# Check if the "Workdays" cvar is a float
+if typeof(ch.get_cvar("Workdays")) == float:
     wdi = def_wd
     wdi['wdays'] = floor(ch.get_cvar('Workdays'))
 
